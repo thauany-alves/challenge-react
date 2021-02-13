@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+import CartIconImg from "../assets/cart-icon.svg";
 
 const NavBrand = styled.span`
   /* padding: 0 15px; */
@@ -17,26 +19,26 @@ const Nav = styled.header`
   justify-content: space-between;
 `;
 
-const NavLink = styled.a`
+const Link = styled(NavLink)`
   /* padding: 0 15px; */
   text-decoration: none;
   color: aliceblue;
-  font-size: 18px;
+  font-size: 16px;
   margin: 8px;
 `;
 
 const Img = styled.img`
-  width: 30px;
+  width: 26px;
 `;
 
 const Header = () => {
     return(
         <Nav>
           <NavBrand>Challenge Supera</NavBrand>
-          <div class="links">
-            <NavLink href="#" target="_blank">Home</NavLink>
-            <NavLink href="#" target="_blank">Products</NavLink>
-            <NavLink href="#"><Img src="assets/cart-icon.svg"/> Carrinho</NavLink>
+          <div>
+            <Link to="">Home</Link>
+            <Link to="">Products</Link>
+            <Link to=""><Img src={CartIconImg} alt="cart"/> Carrinho</Link>
           </div>
         </Nav>
     );
