@@ -1,4 +1,6 @@
+import React, {Component} from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const CardsContainer = styled.div`
   max-width: 800px;
@@ -6,6 +8,11 @@ const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+`;
+
+const UnstyledLink = styled(Link)`
+  text-decoration: none;
+  color: aliceblue;
 `;
 
 const Card = styled.div`
@@ -33,56 +40,47 @@ const Img = styled.img`
   width:100%;
 `;
 
+class Products extends React.Component {
+    constructor(props){
+      super(props);
+      this.state = {selectedItem: null};
+    }
 
-const Products = () => {
-    return(
+    onItemSelect(item) {
+      this.setState({ selectedItem: item});
+    }
+  
+    render(){
+      const products = this.props.products.map(product => {
+        return (
+          <div key={product.id}>
+              <Card>
+                <UnstyledLink to={`/products/${product.id}`} >
+                  <div>
+                    <Img src={`../assets/${product.image}`} alt="Product" />
+                  </div>
+            
+                  <ProductName>
+                    <p>{product.name}</p>
+                  </ProductName>
+            
+                  <ProductInfo>
+                    <p>{product.score}</p>
+                    <Price>{`R$ ${product.price}`}</Price>
+                  </ProductInfo>
+                </UnstyledLink>
+              </Card>
+          </div>
+        );
+      });
+
+      return(
         <CardsContainer>
-          <Card>
-            <div class="card_image_container">
-              <Img src="https://img.youtube.com/vi/RlK8nu_YErc/maxresdefault.jpg" alt="Video Aula" />
-            </div>
-
-            <ProductName>
-              <p>Tudo que você precisa saber sobre carreira</p>
-            </ProductName>
-
-            <ProductInfo>
-              <p>14 minutos</p>
-              <Price class="card_price">Free</Price>
-            </ProductInfo>
-          </Card>
-
-          <Card>
-            <div class="card_image_container">
-              <Img src="https://img.youtube.com/vi/RlK8nu_YErc/maxresdefault.jpg" alt="Video Aula" />
-            </div>
-
-            <ProductName>
-              <p>Tudo que você precisa saber sobre carreira</p>
-            </ProductName>
-
-            <ProductInfo>
-              <p>14 minutos</p>
-              <Price class="card_price">Free</Price>
-            </ProductInfo>
-          </Card>
-
-          <Card>
-            <div class="card_image_container">
-              <Img src="https://img.youtube.com/vi/RlK8nu_YErc/maxresdefault.jpg" alt="Video Aula" />
-            </div>
-
-            <ProductName>
-              <p>Tudo que você precisa saber sobre carreira</p>
-            </ProductName>
-
-            <ProductInfo>
-              <p>14 minutos</p>
-              <Price class="card_price">Free</Price>
-            </ProductInfo>
-          </Card>
+          {products}
         </CardsContainer>
-    );
+      );
+    }
+    
 }
 
 export default Products;
