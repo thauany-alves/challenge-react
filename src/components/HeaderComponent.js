@@ -17,6 +17,7 @@ const Nav = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 20px;
 `;
 
 const Link = styled(NavLink)`
@@ -37,8 +38,8 @@ const Header = () => {
           <NavBrand>Challenge Supera</NavBrand>
           <div>
             <Link to="">Home</Link>
-            <Link to="">Products</Link>
-            <Link to=""><Img src={CartIconImg} alt="cart"/> Carrinho</Link>
+            <Link to="/">Produtos</Link>
+            <Link to="/cart"><Img src={CartIconImg} alt="cart"/>Carrinho</Link>
           </div>
         </Nav>
     );
