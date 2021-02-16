@@ -1,2 +1,3 @@
 export const ADD_ITEM_TO_CART = 'ADD_ITEM_TO_CART';
+export const RM_ITEM_CART = 'RM_ITEM_CART';
 export const CALCULATE_PURCHASE = 'CALCULATE_PURCHASE';

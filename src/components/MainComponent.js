@@ -4,7 +4,7 @@ import Product from './ProductsComponent';
 import Cart from './CartComponent';
 
 import {Switch, Route, withRouter} from 'react-router-dom';
-import { addItemToCart, calculatePurchase } from '../redux/ActionCreators';
+import { addItemToCart, calculatePurchase, removeItem } from '../redux/ActionCreators';
 import { connect } from 'react-redux';
 import Checkout from './CheckoutComponent';
 
@@ -19,7 +19,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   addItemToCart: (productId) => dispatch(addItemToCart(productId)),
-  calculatePurchase: (subtotal, frete) => dispatch(calculatePurchase(subtotal, frete))
+  calculatePurchase: (subtotal, frete) => dispatch(calculatePurchase(subtotal, frete)),
+  removeItem: (item) => dispatch(removeItem(item))
 });
 
 
@@ -31,9 +32,15 @@ class Main extends React.Component {
       <React.Fragment>
         <Header />
         <Switch>
-          <Route exact path="/"  component = {() => <Product products={this.props.products} addItemToCart={this.props.addItemToCart} />}  />
-          <Route exact path="/cart" component = {() => <Cart items_cart={this.props.items_cart} calculatePurchase={this.props.calculatePurchase} />}  />
-          <Route exact path="/checkout" component = {() => <Checkout items_cart={this.props.items_cart} checkout={this.props.checkout} />}  />
+          <Route exact path="/"  component = {() => 
+            <Product products={this.props.products} addItemToCart={this.props.addItemToCart} />}  
+          />
+          <Route exact path="/cart" component = {() => 
+            <Cart items_cart={this.props.items_cart} calculatePurchase={this.props.calculatePurchase} removeItem={this.props.removeItem} />} 
+          />
+          <Route exact path="/checkout" component = {() => 
+            <Checkout items_cart={this.props.items_cart} checkout={this.props.checkout} />}  
+          />
         </Switch>
       </React.Fragment>
     );

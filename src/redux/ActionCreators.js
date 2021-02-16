@@ -15,3 +15,11 @@ export const calculatePurchase = (subtotal, frete) => ({
     }
 });
 
+export const removeItem = ({item}) => ({
+    type: ActionTypes.RM_ITEM_CART,
+    payload: {
+        item: item,
+    }
+});
+
+
