@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 
@@ -86,29 +87,18 @@ const Label = styled.p`
 
 
 export default function Cart(props){
-  const Item = ({item}) => {
-    return(
-      <CardItem>
-        <ImgContainer>
-            <Img src={`../assets/${item.product.image}`} alt="image item"/>
-        </ImgContainer>
-        <ItemDescription>
-          <InfoItem>
-            <NameProduct>{item.product.name}</NameProduct>
-          </InfoItem>
 
-          <InfoItem>
-            <Label>Score</Label>
-            <Info>{item.product.score}</Info>
-          </InfoItem>
+  const history = useHistory();
   
-          <InfoItem>
-            <Label>Valor</Label>
-            <Info>R$ {item.product.price}</Info>
-          </InfoItem>                    
-        </ItemDescription>
-      </CardItem>
-    );
+  function handlePurchase(){
+    let subtotal = props.items_cart.reduce((t, item) => t+item.product.price, 0);
+    let frete = subtotal > 250 ? 0 : (props.items_cart.length * 10);
+    console.log('subtotal', subtotal);
+    console.log('frete', frete.toFixed(2));
+    
+    props.calculatePurchase(subtotal, frete);
+
+    history.push('/checkout');
   }
   
   if(props.items_cart.length > 0){
@@ -138,7 +128,7 @@ export default function Cart(props){
             </CardItem>
           );
         })}
-        <ButtonCheckout onClick="">
+        <ButtonCheckout onClick={() => handlePurchase()}>
           Comprar
         </ButtonCheckout>
       </CardsContainer>

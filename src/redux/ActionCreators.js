@@ -6,3 +6,12 @@ export const addItemToCart = (product) => ({
         product: product, 
     }
 });
+
+export const calculatePurchase = (subtotal, frete) => ({
+    type: ActionTypes.CALCULATE_PURCHASE,
+    payload: {
+        subtotal: subtotal,
+        frete: frete
+    }
+});
+
