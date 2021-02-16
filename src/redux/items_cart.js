@@ -7,12 +7,16 @@ export const ItemsOnCart = (state = ITEMS_CART, action) => {
     switch (action.type) {
         case ActionTypes.ADD_ITEM_TO_CART:
             var item = action.payload;
-            item.id = state.length;
-            console.log("Item: ", item);
-            return state.concat(item);
-
+            // console.log('Item a adicionar', item.product);
+            if(state.some(i => i.product === item.product)){
+                alert('Item já foi adicionado ao seu carrinho!');
+                return state;
+            }else{
+                item.id = state.length;
+                // console.log("Item: ", item);
+                return state.concat(item);
+            }
         default:
-            console.log("No carrinho", state);
           return state;
       }
 };
