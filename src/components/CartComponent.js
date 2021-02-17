@@ -21,24 +21,27 @@ const CardsContainer = styled.div`
 `;
 
 const CardItem = styled.div`
-  background-color: #7159c1;
+  background-color: var(--color-primary);
   border-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  justify-items: space-around;
-  height: 160px;
+  display: grid;
+  grid-template-columns: 0.6fr 1fr 0.6fr;
+  overflow: hidden;
+  height: 168px;
   margin: 10px;
   padding: 5px;
   /* align-items: center; */
 `;
 
-const ButtonCheckout = styled.button`
+const Button = styled.button`
   margin: 8px 10px;
   padding: 10px;
   border-radius: 4px;
-  background-color: #50fa7b;
+  font-weight: 600;
+  border: 2px solid ${props => props.primary ? "var(--color-secondary)" : "var(--color-primary)"};
   font-size: 20px;
-  color: aliceblue;
+  color:   ${props => props.primary ? "white" : "var(--color-primary)"};
+  background: ${props => props.primary ? "var(--color-secondary)" : "white"};
+  cursor: pointer;
   
 `;
 
@@ -55,19 +58,16 @@ const InfoItem = styled.div`
   align-items: center
 `;
 
-const ImgContainer = styled.div`
-  width: 22%;
-`;
 
 const Img = styled.img`
-  width:94%;
+  width: 85%;
 `;
 
 const Info = styled.p`
   font-size: 14px;
   padding-right: 4px;
   font-weight: 500;
-  background-color: #7159c1;
+  background-color: var(--color-primary);
   filter: brightness(80%);
   padding: 4px;
   border-radius: 4px;
@@ -85,6 +85,18 @@ const Label = styled.p`
   padding-right: 5px;
 `;
 
+const OptionRemove = styled.button`
+  margin-top: 60%;
+  height: 40px;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: 2px solid ${props => props.primary ? "var(--color-secondary)" : "var(--color-primary)"};
+  font-size: 16px;
+  color:   ${props => props.primary ? "white" : "var(--color-primary)"};
+  background: ${props => props.primary ? "var(--color-secondary)" : "white"};
+  cursor: pointer;
+`;
 
 export default function Cart(props){
 
@@ -100,16 +112,21 @@ export default function Cart(props){
 
     history.push('/checkout');
   }
+
+  function handleRemoveItem(item){
+    props.removeItem(item);
+    history.push('/cart');
+  }
   
   if(props.items_cart.length > 0){
     return(
       <CardsContainer> 
         {props.items_cart.map( item => {
           return(
-            <CardItem>
-              <ImgContainer>
+            <CardItem key={item.product.id}>
+              <div>
                   <Img src={`../assets/${item.product.image}`} alt="image item"/>
-              </ImgContainer>
+              </div>
               <ItemDescription>
                 <InfoItem>
                   <NameProduct>{item.product.name}</NameProduct>
@@ -125,12 +142,18 @@ export default function Cart(props){
                   <Info>R$ {item.product.price}</Info>
                 </InfoItem>                    
               </ItemDescription>
+              <OptionRemove onClick={() => handleRemoveItem({item})}>
+                <span><i className="fa fa-trash"></i> Remover do Carrinho</span>
+              </OptionRemove>
             </CardItem>
           );
         })}
-        <ButtonCheckout onClick={() => handlePurchase()}>
-          Comprar
-        </ButtonCheckout>
+        <Button onClick={() => handlePurchase()}>
+          Finalizar
+        </Button>
+        <Button primary onClick={() => history.push("/")} >
+          Continuar comprando
+        </Button>
       </CardsContainer>
     )
   }else{
