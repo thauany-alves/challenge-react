@@ -9,6 +9,12 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+
+  @media (max-width: 500px) {
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const OptionSort = styled.button`
@@ -27,6 +33,10 @@ const OptionSort = styled.button`
   &:hover{
     color: var(--color-secondary);
     border-color: var(--color-secondary);
+  }
+
+  @media (max-width: 500px) {
+    margin: 0;
   }
 
 `;

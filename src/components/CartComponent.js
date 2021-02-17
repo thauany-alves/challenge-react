@@ -29,7 +29,14 @@ const CardItem = styled.div`
   height: 168px;
   margin: 10px;
   padding: 5px;
-  /* align-items: center; */
+  
+  @media (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+  }
 `;
 
 const Button = styled.button`
@@ -61,6 +68,10 @@ const InfoItem = styled.div`
 
 const Img = styled.img`
   width: 85%;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const Info = styled.p`
@@ -73,7 +84,7 @@ const Info = styled.p`
   border-radius: 4px;
 `;
 
-const NameProduct = styled.p`
+const Title = styled.p`
   margin-top: 0;
   font-size: 18px;
   font-weight: 600;
@@ -96,6 +107,10 @@ const OptionRemove = styled.button`
   color:   ${props => props.primary ? "white" : "var(--color-primary)"};
   background: ${props => props.primary ? "var(--color-secondary)" : "white"};
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    margin-top: 2px;
+  }
 `;
 
 export default function Cart(props){
@@ -121,6 +136,7 @@ export default function Cart(props){
   if(props.items_cart.length > 0){
     return(
       <CardsContainer> 
+        <Title>Itens no Carrinho</Title>
         {props.items_cart.map( item => {
           return(
             <CardItem key={item.product.id}>
@@ -129,12 +145,12 @@ export default function Cart(props){
               </div>
               <ItemDescription>
                 <InfoItem>
-                  <NameProduct>{item.product.name}</NameProduct>
+                  <Title>{item.product.name}</Title>
                 </InfoItem>
 
                 <InfoItem>
                   <Label>Score</Label>
-                  <Info>{item.product.score}</Info>
+                  <span><i className="fa fa-star"></i>  {item.product.score}</span>
                 </InfoItem>
         
                 <InfoItem>

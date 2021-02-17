@@ -19,7 +19,3 @@ code {
     monospace;
 }
 
-@keyframes example {
-  from {display: hidden;}
-  to {display: visible;}
-}
