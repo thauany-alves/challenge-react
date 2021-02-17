@@ -37,7 +37,6 @@ const Header = () => {
         <Nav>
           <NavBrand>Challenge Supera</NavBrand>
           <div>
-            <Link to="">Home</Link>
             <Link to="/">Produtos</Link>
             <Link to="/cart"><Img src={CartIconImg} alt="cart"/>Carrinho</Link>
           </div>
