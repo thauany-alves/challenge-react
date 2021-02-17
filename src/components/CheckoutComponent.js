@@ -19,7 +19,7 @@ const CheckoutContainer = styled.div`
 `;
 
 const CardItems = styled.div`
-  background-color: blueviolet; 
+  background-color: var(--color-primary); 
   border-radius: 4px;
   padding: 20px;
 `;
@@ -52,7 +52,7 @@ const Info = styled.span`
 const CardCheckout = styled.div`
   border-radius: 4px;
   padding: 20px;
-  background-color: aquamarine;
+  background-color: var(--color-secondary);
 `;
 
 const Border = styled.div`
@@ -67,7 +67,7 @@ export default function Checkout(props){
       <CardItems>
         {props.items_cart.map(item => {
           return(
-            <Item>
+            <Item key={item.product.id}>
               <Info>{item.product.name}</Info>
               <Info>R$ {item.product.price}</Info>  
             </Item>
